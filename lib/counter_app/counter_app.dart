@@ -12,12 +12,12 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => CounterBloc(),
       child: MaterialApp(
-        title: 'Ecommerce with Bloc and Firebase',
+        title: 'Counter Bloc App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MyHomePage(title: 'Ecommerce Project'),
+        home: const MyHomePage(title: 'Counter Project by Bloc'),
       ),
     );
   }
@@ -33,8 +33,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,9 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  'You have pushed the button this many times:',
-                ),
+                Text('Bloc Implemented on Counter Display: ',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(fontSize: 20)),
                 Text(
                   '${state.counterValue}',
                   style: Theme.of(context)
@@ -72,21 +72,20 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: (){
+            onPressed: () {
               context.read<CounterBloc>().add(IncrementEvent());
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
-          const SizedBox(height:20),
+          const SizedBox(height: 20),
           FloatingActionButton(
-            onPressed: (){
+            onPressed: () {
               context.read<CounterBloc>().add(DecrementEvent());
             },
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
-
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
