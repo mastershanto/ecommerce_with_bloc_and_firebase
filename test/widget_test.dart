@@ -5,10 +5,11 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:ecommerce_with_bloc_and_firebase/counter_app/counter_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ecommerce_with_bloc_and_firebase/main.dart';
+// import 'package:ecommerce_with_bloc_and_firebase/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
