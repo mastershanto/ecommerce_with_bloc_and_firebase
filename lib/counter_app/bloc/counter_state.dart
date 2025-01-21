@@ -24,3 +24,25 @@ final class DecrementState extends CounterState {
   final int counterValue;
   DecrementState(this.counterValue):super(counterValue);
 }
+
+// sealed class ShantoKenoMasten extends Equatable{
+//   final int counterValue;
+//   ShantoKenoMasten(this.counterValue);
+//
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [counterValue];
+//
+//   @override
+//   String toString() {
+//     // TODO: implement toString
+//     return super.toString();
+//   }
+// }
+//
+// class Incre extends ShantoKenoMasten{
+//   final int counterValue;
+//   Incre(this.counterValue):super(counterValue);
+// }
+
+
