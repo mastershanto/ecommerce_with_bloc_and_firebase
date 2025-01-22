@@ -1,10 +1,13 @@
+import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/ecommerce_app.dart';
 import 'package:flutter/material.dart';
 
-import 'counter_app/counter_app.dart';
+// import 'counter_app/counter_app.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
 
 void main() {
-  runApp(const MyApp());
+  runApp(const EcommerceApp());
 }
 
-//how are you doing this is my before are the main counter teacher for the others
-//  it is the main goal for the other this things
