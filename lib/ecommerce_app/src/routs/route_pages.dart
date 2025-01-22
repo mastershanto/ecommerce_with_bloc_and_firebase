@@ -10,7 +10,7 @@ import '../presentations/screens/splash_screen.dart';
 part 'routes.dart';
 
 class RoutePages {
-  static final Router = GoRouter(
+  static final ROUTER = GoRouter(
     routes: [
       GoRoute(
         path: Routes.SPLASH_ROUTE,
