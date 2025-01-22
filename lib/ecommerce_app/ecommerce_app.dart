@@ -31,7 +31,7 @@ class EcommerceApp extends StatelessWidget {
   //List of bloc providers
   List<BlocProvider> _blocProviders() {
     return [
-      BlocProvider(create: (context) => SplashCubit()..startSplash()),
+      BlocProvider<SplashCubit>(create: (context) => SplashCubit()..startSplash()),
       // BlocProvider(create: (context)=>RememberSwitchCubit()),
       // BLocProvider(create:(context)=>LoginBloc(context.read<AuthRepository>()))
       // BlocProvider(create:(context)=>SignupBloc()),
