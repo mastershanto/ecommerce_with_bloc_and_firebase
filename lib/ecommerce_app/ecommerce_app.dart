@@ -1,9 +1,9 @@
-import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/bloc/splash/splash_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'src/bloc/Authentications/auth_repository.dart';
+import 'src/blocs/Authentications/auth_repository.dart';
+import 'src/blocs/blocs.dart';
 import 'src/routs/route_pages.dart';
 import 'theme/theme.dart';
 
@@ -28,7 +28,7 @@ class EcommerceApp extends StatelessWidget {
     ];
   }
 
-  //List of bloc providers
+  //List of blocs providers
   List<BlocProvider> _blocProviders() {
     return [
       BlocProvider<SplashCubit>(create: (context) => SplashCubit()..startSplash()),

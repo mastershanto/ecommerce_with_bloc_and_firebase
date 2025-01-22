@@ -11,9 +11,9 @@ sealed class SplashState extends Equatable {
 
 final class SplashInitial extends SplashState {
   final bool isLoaded;
-  SplashInitial({required this.isLoaded}):super(false);
+  SplashInitial({required this.isLoaded}):super(isLoaded);
 }
 final class SplashEnd extends SplashState{
   final bool isLoaded;
-  SplashEnd({required this.isLoaded}):super(false);
+  SplashEnd({required this.isLoaded}):super(isLoaded);
 }
