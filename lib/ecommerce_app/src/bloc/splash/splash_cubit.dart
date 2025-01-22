@@ -1,8 +1,27 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  SplashCubit() : super(SplashInitial());
+  SplashCubit() : super(SplashInitial(isLoaded:false));
+  void startSplash(){
+    Future.delayed(const Duration(seconds: 2),(){
+      emit(SplashEnd(isLoaded: true));
+    });
+  }
 }
+
+
+// class SplashCubit extends Cubit<SplashState> {
+//   SplashCubit() : super(SplashInitial());
+//   void startSplash(){
+//     Future.delayed(const Duration(seconds: 2),(){
+//       emit(SplashEnd());
+//     });
+//   }
+// }
+
+
+
