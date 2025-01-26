@@ -18,85 +18,62 @@ class NewPasswordScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text(
+            "New Password",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text(
-                    "Welcome ",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Text(
-                    "Please enter data to continue",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
                   Form(
                     key: formKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextFormField(
-                          // controller: state.emailController,
-                          validator: (value){
-                            if(value==""||value==null){
-                              return "Email address is required";
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            label: const Text("Email Address"),
-                            labelStyle: Theme.of(context)
-                                .textTheme
-                                .labelMedium
-                                ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .outlineVariant),
-                          ),
-                        ),
-                        TextFormField(
                           // controller: state.passwordController,
-                          validator: (value){
-                            if(value==""||value==null){
+                          validator: (value) {
+                            if (value == "" || value == null) {
                               return "Password is required";
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            label: const Text("Password"),
+                            label: const Text("New Password"),
                             labelStyle: Theme.of(context)
                                 .textTheme
                                 .labelMedium
                                 ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .outlineVariant),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant),
+                          ),
+                        ),
+                        TextFormField(
+                          // controller: state.passwordController,
+                          validator: (value) {
+                            if (value == "" || value == null) {
+                              return "Password is required";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            label: const Text("Confirm Password"),
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .labelMedium
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outlineVariant),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const Gap(20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Remember Me",
-                          style: Theme.of(context).textTheme.labelMedium),
-                      Switch(value:true,
-                          onChanged:(value){}),
-                      // BlocBuilder<RememberSwitchCubit, RememberSwitchState>(
-                      //   builder: (context, state) {
-                      //     return Switch(
-                      //         value:
-                      //         state is SwitchChanged ? state.value : true,
-                      //         onChanged: (value) => context
-                      //             .read<RememberSwitchCubit>()
-                      //             .switchToggle(value));
-                      //   },
-                      // ),
-                    ],
-                  ),
+
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
@@ -111,10 +88,11 @@ class NewPasswordScreen extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Text("Please, write enter the new password", textAlign: TextAlign.center,style: Theme.of(context).textTheme.bodyLarge,),
               FullWidthButton(
-                buttonText: "Login",
-                onTap: (){
-                  if(formKey.currentState!.validate()){
+                buttonText: "Reset Password",
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
                     context.pushNamed(Routes.LOGIN_ROUTE);
                   }
                 },
