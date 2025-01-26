@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../blocs/blocs.dart';
-import '../../routs/route_pages.dart';
-import '../../utils/asset_manager.dart';
+import '../../../blocs/blocs.dart';
+import '../../../routs/route_pages.dart';
+import '../../../utils/asset_manager.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -26,7 +26,8 @@ class SplashScreen extends StatelessWidget {
           // }
 
           if(state.isLoaded==true){
-            context.goNamed(Routes.LOGIN_ROUTE);
+            // context.goNamed(Routes.LOGIN_ROUTE);
+            context.goNamed(Routes.FORGOT_PASSWORD_ROUTE);
           }
         },
         child: Center(
