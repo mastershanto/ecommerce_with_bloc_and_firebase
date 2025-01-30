@@ -27,14 +27,14 @@ class SplashScreen extends StatelessWidget {
 
           if(state.isLoaded==true){
             // context.goNamed(Routes.LOGIN_ROUTE);
-            context.goNamed(Routes.FORGOT_PASSWORD_ROUTE);
+            context.goNamed(Routes.REGISTER_ROUTE);
           }
         },
         child: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(Assets.APP_LOGO, height: 50.h, width: 80.w),
+                SvgPicture.asset(AssetManager.APP_LOGO, height: 50.h, width: 80.w),
                 const SizedBox(height:16),
                 const Center(child: CircularProgressIndicator()),
               ]
