@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Wrapper extends StatelessWidget {
-  const Wrapper({super.key});
+  final child;
+  const Wrapper({super.key,this.child});
+
+
 
   @override
   Widget build(BuildContext context) {
