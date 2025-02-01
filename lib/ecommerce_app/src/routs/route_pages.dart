@@ -5,7 +5,14 @@ import 'package:go_router/go_router.dart';
 part 'routes.dart';
 
 class RoutePages {
-  static final ROUTER = GoRouter(
+
+  // for using GoRouter,
+  // use the "context.goNamed()" for completely replaced, not cable to back again
+  // use the "context.pushNamed()" , if you need to back this file again.
+  // use the "goNamed" for completely replaced
+
+
+  static final GoRouter ROUTER = GoRouter(
     routes: [
 
       //forgot_password
