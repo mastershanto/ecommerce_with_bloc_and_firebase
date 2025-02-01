@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
 
           if(state.isLoaded==true){
             // context.goNamed(Routes.LOGIN_ROUTE);
-            context.goNamed(Routes.REGISTER_ROUTE);
+            context.goNamed(Routes.LOGIN_ROUTE);
           }
         },
         child: Center(

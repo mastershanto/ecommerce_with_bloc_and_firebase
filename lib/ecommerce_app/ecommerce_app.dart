@@ -1,9 +1,9 @@
-
+import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'src/blocs/Authentications/auth_repository.dart';
 import 'src/blocs/blocs.dart';
+import 'src/blocs/login/login_bloc.dart';
 import 'src/routs/route_pages.dart';
 import 'theme/theme.dart';
 
@@ -24,7 +24,7 @@ class EcommerceApp extends StatelessWidget {
   //List of repository providers
   List<RepositoryProvider> _repositoryProviders() {
     return [
-      RepositoryProvider(create: (context) => AuthRepository()),
+      RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
     ];
   }
 
@@ -32,9 +32,9 @@ class EcommerceApp extends StatelessWidget {
   List<BlocProvider> _blocProviders() {
     return [
       BlocProvider<SplashCubit>(create: (context) => SplashCubit()..startSplash()),
-      // BlocProvider(create: (context)=>RememberSwitchCubit()),
-      // BLocProvider(create:(context)=>LoginBloc(context.read<AuthRepository>()))
-      // BlocProvider(create:(context)=>SignupBloc()),
+      BlocProvider<RememberSwitchCubit>(create: (context)=>RememberSwitchCubit()),
+      BlocProvider<LoginBloc>(create:(context)=>LoginBloc(context.read<AuthRepository>())),
+      BlocProvider<SignupBloc>(create:(context)=>SignupBloc()),
     ];
   }
 
