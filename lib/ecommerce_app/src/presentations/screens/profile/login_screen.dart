@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
           BlocConsumer<LoginBloc, LoginState>(
               builder: (context, state) {
 
-                if(state is LoginLoading){
+                if(state is LoginLoadingState){
                   return Center(child:CircularProgressIndicator());
                 }
 
@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                       SocialLoginButton(
                         buttonType: SocialLoginButtonType.facebook,
                         onPressed: () {
-                          context.read<LoginBloc>().add(RequestFacebookLogin());
+                          context.read<LoginBloc>().add(RequestFacebookLoginEvent());
                         },
                       ),
                       Gap(20),
@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                       SocialLoginButton(
                         buttonType: SocialLoginButtonType.google,
                         onPressed: () {
-                          context.read<LoginBloc>().add(RequestGoogleLogin());
+                          context.read<LoginBloc>().add(RequestGoogleLoginEvent());
                         },
                       ),
                     ],

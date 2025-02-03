@@ -10,16 +10,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 final AuthRepository repository;
 
   LoginBloc(this.repository) : super(LoginInitial()) {
-    on<RequestGoogleLogin>((event, emit) async {
+    on<RequestGoogleLoginEvent>((event, emit) async {
   try{
-    emit(LoginLoading());
+    emit(LoginLoadingState());
     final user=await repository.signInWithGoogle();
   if(user!=null){
     debugPrint("User: ${user.displayName}");
-    emit(LoginSuccess());
+    emit(LoginSuccessState());
   }else{
     debugPrint("User: Failed to found user information!");
-    emit(LoginFailed("User is null after login!"));
+    emit(LoginFailedState("User is null after login!"));
     return null;
   }
 
@@ -27,20 +27,20 @@ final AuthRepository repository;
 
   } catch(error){
     debugPrint(error.toString());
-    emit(LoginFailed(error.toString()));
+    emit(LoginFailedState(error.toString()));
   }
     });
-    on<RequestFacebookLogin>((event, emit) async {
+    on<RequestFacebookLoginEvent>((event, emit) async {
   try{
-    emit(LoginLoading());
+    emit(LoginLoadingState());
     final user=await repository.signInWithFacebook();
 
     debugPrint("User: ${user?.displayName}");
-    emit(LoginSuccess());
+    emit(LoginSuccessState());
 
   } catch(error){
     debugPrint(error.toString());
-    emit(LoginFailed(error.toString()));
+    emit(LoginFailedState(error.toString()));
   }
     });
 
@@ -57,7 +57,20 @@ final AuthRepository repository;
     //   }
     //
     // });
+
+
+    on<RequestEmailLoginEvent>((event, emit)async{
+
+    });
+    on<RequestLogOutEvent>((event, emit) async{
+      try {
+        await repository.signOutUser().then((value) =>emit(LogOutSuccessState()));
+      }catch(e){
+        emit(LoginFailedState(e.toString()));
+      }
+    });
   }
+
 
 
 }

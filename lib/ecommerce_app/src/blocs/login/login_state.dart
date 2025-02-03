@@ -4,9 +4,10 @@ part of 'login_bloc.dart';
 sealed class LoginState {}
 
 final class LoginInitial extends LoginState {}
-final class LoginLoading extends LoginState {}
-final class LoginSuccess extends LoginState {}
-final class LoginFailed extends LoginState {
+final class LoginLoadingState extends LoginState {}
+final class LoginSuccessState extends LoginState {}
+final class LogOutSuccessState extends LoginState {}
+final class LoginFailedState extends LoginState {
   final message;
-  LoginFailed(this.message);
+  LoginFailedState(this.message);
 }
