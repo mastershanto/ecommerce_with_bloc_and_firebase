@@ -48,11 +48,11 @@ class SignUpScreen extends StatelessWidget {
                                     FormValidator.inputValidator(value),
                                 decoration: InputDecoration(
                                   label: const Text("User Name"),
-                                  labelStyle: Theme.of(context)
+                                  labelStyle: _theme
                                       .textTheme
                                       .labelMedium
                                       ?.copyWith(
-                                          color: Theme.of(context)
+                                          color: _theme
                                               .colorScheme
                                               .outlineVariant),
                                 ),
@@ -63,11 +63,11 @@ class SignUpScreen extends StatelessWidget {
                                     FormValidator.emailValidator(value),
                                 decoration: InputDecoration(
                                   label: const Text("Email Address"),
-                                  labelStyle: Theme.of(context)
+                                  labelStyle: _theme
                                       .textTheme
                                       .labelMedium
                                       ?.copyWith(
-                                          color: Theme.of(context)
+                                          color: _theme
                                               .colorScheme
                                               .outlineVariant),
                                 ),
@@ -78,11 +78,11 @@ class SignUpScreen extends StatelessWidget {
                                     FormValidator.inputValidator(value),
                                 decoration: InputDecoration(
                                   label: const Text("Password"),
-                                  labelStyle: Theme.of(context)
+                                  labelStyle: _theme
                                       .textTheme
                                       .labelMedium
                                       ?.copyWith(
-                                          color: Theme.of(context)
+                                          color: _theme
                                               .colorScheme
                                               .outlineVariant),
                                 ),
@@ -93,11 +93,11 @@ class SignUpScreen extends StatelessWidget {
                                     FormValidator.inputValidator(value),
                                 decoration: InputDecoration(
                                   label: const Text("Confirm Password"),
-                                  labelStyle: Theme.of(context)
+                                  labelStyle: _theme
                                       .textTheme
                                       .labelMedium
                                       ?.copyWith(
-                                          color: Theme.of(context)
+                                          color: _theme
                                               .colorScheme
                                               .outlineVariant),
                                 ),
