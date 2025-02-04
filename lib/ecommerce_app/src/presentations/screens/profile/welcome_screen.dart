@@ -17,6 +17,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme=Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -25,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           Text(
             "Let's Get Started",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: _theme.textTheme.titleLarge,
           ),
           BlocConsumer<LoginBloc, LoginState>(
             builder: (context, state) {
@@ -43,10 +44,10 @@ class WelcomeScreen extends StatelessWidget {
                         buttonType: SocialLoginButtonType.facebook,
                         onPressed: () => context.read<LoginBloc>().add(RequestFacebookLogin())),
                     const Gap(10),
-                    SocialLoginButton(
-                        buttonType: SocialLoginButtonType.twitter,
-                        onPressed: () => context.read<LoginBloc>().add(RequestTwitterLogin())),
-                    const Gap(10),
+                    // SocialLoginButton(
+                    //     buttonType: SocialLoginButtonType.twitter,
+                    //     onPressed: () => context.read<LoginBloc>().add(RequestTwitterLogin())),
+                    // const Gap(10),
                     SocialLoginButton(
                         buttonType: SocialLoginButtonType.google, onPressed: () => context.read<LoginBloc>().add(RequestGoogleLogin())),
                   ],
@@ -71,15 +72,15 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Already have an account?',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
+                    style: _theme.textTheme.bodyMedium?.copyWith(
+                        color: _theme.colorScheme.onSurface),
                   ),
                   TextButton(
                     onPressed: () => context.pushNamed(Routes.LOGIN_ROUTE),
                     child: Text(
                       Values.SIGN_IN_BUTTON_TEXT,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: Theme.of(context)
+                      style: _theme.textTheme.labelLarge?.copyWith(
+                          color: _theme
                               .colorScheme
                               .onPrimaryContainer),
                     ),)

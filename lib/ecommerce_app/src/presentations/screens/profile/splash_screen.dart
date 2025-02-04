@@ -14,9 +14,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme=Theme.of(context);
     return Scaffold(
-      backgroundColor: Theme
-          .of(context)
+      backgroundColor: _theme
           .colorScheme
           .onPrimaryContainer,
       body: BlocListener<SplashCubit, SplashState>(
