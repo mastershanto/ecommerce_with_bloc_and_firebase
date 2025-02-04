@@ -23,17 +23,9 @@ final class SignUpLoadingState extends SignUpState{
   // TODO: implement props
   List<Object?> get props => [];
 }
-final class SignUpSuccessState extends SignUpState{
-  final TextEditingController usernameController=TextEditingController();
-  final TextEditingController emailController=TextEditingController();
-  final TextEditingController passwordController=TextEditingController();
-  final TextEditingController ConfirmPasswordController=TextEditingController();
-  SignUpSuccessState();
-  @override
-  // TODO: implement props
-  List<Object?> get props => [usernameController,emailController,passwordController,ConfirmPasswordController];
 
-}
+final class SignUpSuccessState extends SignUpState{}
+
 final class SignUpFailedState extends SignUpState{
   final String message;
   SignUpFailedState(this.message);

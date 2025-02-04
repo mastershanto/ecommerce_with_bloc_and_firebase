@@ -1,6 +1,5 @@
 part of 'sign_up_bloc.dart';
 
-
 sealed class SignUpEvent extends Equatable {
   @override
   // TODO: implement props
@@ -12,6 +11,8 @@ class RequestEmailSignUpEvent extends SignUpEvent {
   final String email;
   final String password;
   final String confirmPassword;
+
+  // RequestEmailSignUpEvent (this.username, this.email, this.password, this.confirmPassword);
 
   RequestEmailSignUpEvent(
     this.username,
