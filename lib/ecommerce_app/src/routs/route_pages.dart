@@ -12,21 +12,24 @@ class RoutePages {
   // use the "context.pushNamed()" , if you need to back this file again.
   // use the "goNamed" for completely replaced
 
-  static final GoRouter ROUTER = GoRouter(
+  static final authService = AuthService();
+  static final ROUTER = GoRouter(
     redirect: (context, state) {
-      final authService = AuthService();
-
       if (authService.checkLoginStatus()) {
-        final fp = state.fullPath;
-        if (fp == Routes.WELCOME_ROUTE ||
-            fp == Routes.REGISTER_ROUTE ||
-            fp == Routes.LOGIN_ROUTE) {
+        if (state.fullPath == Routes.LOGIN_ROUTE ||
+            state.fullPath == Routes.REGISTER_ROUTE ||
+            state.fullPath == Routes.WELCOME_ROUTE) {
           return Routes.HOME_ROUTE;
-        }else{
+        } else {
           return state.fullPath;
         }
-      } else {}
-      return Routes.WELCOME_ROUTE;
+      } else {
+        if (state.fullPath == Routes.LOGIN_ROUTE ||
+            state.fullPath == Routes.REGISTER_ROUTE) {
+          return state.fullPath;
+        }
+        return Routes.WELCOME_ROUTE;
+      }
     },
     routes: [
       //forgot_password
@@ -51,7 +54,7 @@ class RoutePages {
         path: Routes.REGISTER_ROUTE,
         name: Routes.REGISTER_ROUTE,
         pageBuilder: (context, state) => MaterialPage(
-          child: SignupScreen(),
+          child: SignUpScreen(),
         ),
       ),
 

@@ -8,13 +8,13 @@ sealed class SignUpEvent extends Equatable {
 }
 
 class RequestEmailSignUpEvent extends SignUpEvent {
-  final String userName;
+  final String username;
   final String email;
   final String password;
   final String confirmPassword;
 
   RequestEmailSignUpEvent(
-    this.userName,
+    this.username,
     this.email,
     this.password,
     this.confirmPassword,
@@ -22,5 +22,5 @@ class RequestEmailSignUpEvent extends SignUpEvent {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [userName, email, password, confirmPassword];
+  List<Object?> get props => [username, email, password, confirmPassword];
 }

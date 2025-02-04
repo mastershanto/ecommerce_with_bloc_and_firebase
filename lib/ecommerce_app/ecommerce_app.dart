@@ -34,7 +34,7 @@ class EcommerceApp extends StatelessWidget {
       BlocProvider<SplashCubit>(create: (context) => SplashCubit()..startSplash()),
       BlocProvider<RememberSwitchCubit>(create: (context)=>RememberSwitchCubit()),
       BlocProvider<LoginBloc>(create:(context)=>LoginBloc(context.read<AuthRepository>())),
-      BlocProvider<SignupBloc>(create:(context)=>SignupBloc()),
+      BlocProvider<SignUpBloc>(create:(context)=>SignUpBloc(context.read<AuthRepository>())),
     ];
   }
 

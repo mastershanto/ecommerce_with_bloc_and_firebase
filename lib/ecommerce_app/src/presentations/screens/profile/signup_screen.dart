@@ -11,8 +11,8 @@ import '../../../routs/route_pages.dart';
 import '../../../utils/values.dart';
 import '../../widgets/full_width_button.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class SignupScreen extends StatelessWidget {
                               onChanged: (value) {
                                 context
                                     .read<RememberSwitchCubit>()
-                                    .SwitchToggle(value);
+                                    .switchToggle(value);
                               });
                         },
                       ),

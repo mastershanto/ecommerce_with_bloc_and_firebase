@@ -1,12 +1,14 @@
-import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/presentations/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:social_login_buttons/social_login_buttons.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import '../../../blocs/blocs.dart';
 import '../../../routs/route_pages.dart';
+import '../../../utils/values.dart';
 import '../../widgets/full_width_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -14,87 +16,143 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Let's get started",
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-          BlocConsumer<LoginBloc, LoginState>(
-              builder: (context, state) {
-
-                if(state is LoginLoadingState){
-                  return Center(child:CircularProgressIndicator());
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Sign In',
+              style: theme.textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.bold),
+            ),
+            BlocConsumer<LoginBloc, LoginState>(
+              listener: (context, state) {
+                if (state is LoginSuccess) {
+                  context.goNamed(Routes.HOME_ROUTE);
                 }
 
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SocialLoginButton(
-                        buttonType: SocialLoginButtonType.facebook,
-                        onPressed: () {
-                          context.read<LoginBloc>().add(RequestFacebookLoginEvent());
-                        },
-                      ),
-                      Gap(20),
-                      SocialLoginButton(
-                        buttonType: SocialLoginButtonType.twitter,
-                        onPressed: () {},
-                      ),
-                      Gap(20),
-                      SocialLoginButton(
-                        buttonType: SocialLoginButtonType.google,
-                        onPressed: () {
-                          context.read<LoginBloc>().add(RequestGoogleLoginEvent());
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              }, listener: (context, state) {
-
-                Fluttertoast.showToast(msg: "Login Success");
-                Future.delayed(Duration(seconds: 1 ), (){
-                  context.goNamed(Routes.HOME_ROUTE);
-                });
-
-          }),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have and account?",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurface),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Sign In",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              Theme.of(context).colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.bold),
+                if (state is LoginFailed) {
+                  Fluttertoast.showToast(msg: state.message);
+                }
+              },
+              builder: (context, state) {
+                if (state is LoginInitial) {
+                  return Form(
+                    key: formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: state.emailController,
+                          decoration: InputDecoration(
+                            label: const Text('Email'),
+                            labelStyle: theme.textTheme.labelMedium?.copyWith(
+                                color: theme.colorScheme.outlineVariant),
+                          ),
+                          validator: (value) {
+                            if (value == '' || value == null) {
+                              return 'Email is required';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        TextFormField(
+                          controller: state.passwordController,
+                          decoration: InputDecoration(
+                            label: const Text('Password'),
+                            labelStyle: theme.textTheme.labelMedium?.copyWith(
+                                color: theme.colorScheme.outlineVariant),
+                          ),
+                          validator: (value) {
+                            if (value == '' || value == null) {
+                              return 'Password is required';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+            const Gap(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Remember Me',
+                  style: theme.textTheme.labelMedium,
+                ),
+                BlocBuilder<RememberSwitchCubit, RememberSwitchState>(
+                  builder: (context, state) {
+                    return Switch(
+                      value: state is SwitchChanged ? state.value : true,
+                      onChanged: (value) => context
+                          .read<RememberSwitchCubit>()
+                          .switchToggle(value),
+                    );
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have an account?",
+                style: theme.textTheme.bodyMedium
+                    ?.copyWith(color: theme.colorScheme.onSurface),
               ),
-              FullWidthButton(
-                buttonText: "Create an account",
-                onTap: () => context.pushNamed(
-                  Routes.REGISTER_ROUTE,
+              TextButton(
+                onPressed: () => context.pushNamed(Routes.REGISTER_ROUTE),
+                child: Text(
+                  Values.SIGN_UP_BUTTON_TEXT,
+                  style: theme.textTheme.labelLarge
+                      ?.copyWith(color: theme.colorScheme.onPrimaryContainer),
                 ),
               )
             ],
+          ),
+          BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              return FullWidthButton(
+                buttonText:
+                    state is LoginInitial ? Values.SIGN_IN_BUTTON_TEXT : '',
+                buttonChild: state is LoginLoading
+                    ? LoadingAnimationWidget.discreteCircle(
+                        color: theme.colorScheme.onPrimaryContainer, size: 35.w)
+                    : null,
+                onTap: () {
+                  if (state is LoginInitial) {
+                    if (formKey.currentState!.validate()) {
+                      context.read<LoginBloc>().add(RequestEmailLogin(
+                          email: state.emailController.text,
+                          password: state.passwordController.text,
+                          isRemember: RememberSwitchCubit.isRemember));
+                    }
+                  }
+                },
+              );
+            },
           ),
         ],
       ),
