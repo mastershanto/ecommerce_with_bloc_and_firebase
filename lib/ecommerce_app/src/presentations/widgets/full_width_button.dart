@@ -7,12 +7,13 @@ class FullWidthButton extends StatelessWidget {
       this.onTap,
       this.backgroundColor,
       this.textColor,
-      required this.buttonText});
+      required this.buttonText,this.buttonChild});
 
   final void Function()? onTap;
   final Color? backgroundColor;
   final Color? textColor;
   final String buttonText;
+  final Widget? buttonChild;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class FullWidthButton extends StatelessWidget {
         color:
             backgroundColor ?? Theme.of(context).colorScheme.onPrimaryContainer,
         child: Center(
-          child: Text(
+          child: buttonChild ?? Text(
             buttonText,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
                 color: textColor ?? Theme.of(context).colorScheme.onSecondary),
