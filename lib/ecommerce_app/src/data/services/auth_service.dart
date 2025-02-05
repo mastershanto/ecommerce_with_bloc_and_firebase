@@ -4,8 +4,8 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
-  bool checkLoginStatus(){
-    final user = _auth.currentUser;
+  Future<bool> checkLoginStatus() async{
+    final user = await _auth.currentUser;
     if(user != null){
       return true;
     } else {
