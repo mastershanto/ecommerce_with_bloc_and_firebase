@@ -21,13 +21,13 @@ class SplashScreen extends StatelessWidget {
           .onPrimaryContainer,
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
-          // if(state is SplashEnd){
-          //   context.goNamed(Routes.WELCOME_ROUTE);
-          // }
 
-          if(state.isLoaded==true){
+
+          if(state is SplashEnd){
             // context.goNamed(Routes.LOGIN_ROUTE);
-            context.goNamed(Routes.LOGIN_ROUTE);
+            // context.goNamed(Routes.LOGIN_ROUTE);
+            context.goNamed(Routes.WELCOME_ROUTE);
+            // context.goNamed(Routes.REGISTER_ROUTE);
           }
         },
         child: Center(
