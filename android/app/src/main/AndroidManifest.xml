@@ -2,6 +2,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:label="ecommerce_with_bloc_and_firebase"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
