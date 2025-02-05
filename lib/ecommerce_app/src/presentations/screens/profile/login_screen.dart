@@ -17,7 +17,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final theme = Theme.of(context);
+    final _theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -27,8 +27,8 @@ class LoginScreen extends StatelessWidget {
           children: [
             Text(
               'Sign In',
-              style: theme.textTheme.titleLarge?.copyWith(
-                  color: theme.colorScheme.onSurface,
+              style: _theme.textTheme.titleLarge?.copyWith(
+                  color: _theme.colorScheme.onSurface,
                   fontWeight: FontWeight.bold),
             ),
             BlocConsumer<LoginBloc, LoginState>(
@@ -52,8 +52,8 @@ class LoginScreen extends StatelessWidget {
                           controller: state.emailController,
                           decoration: InputDecoration(
                             label: const Text('Email'),
-                            labelStyle: theme.textTheme.labelMedium?.copyWith(
-                                color: theme.colorScheme.outlineVariant),
+                            labelStyle: _theme.textTheme.labelMedium?.copyWith(
+                                color: _theme.colorScheme.outlineVariant),
                           ),
                           validator: (value) {
                             if (value == '' || value == null) {
@@ -67,8 +67,8 @@ class LoginScreen extends StatelessWidget {
                           controller: state.passwordController,
                           decoration: InputDecoration(
                             label: const Text('Password'),
-                            labelStyle: theme.textTheme.labelMedium?.copyWith(
-                                color: theme.colorScheme.outlineVariant),
+                            labelStyle: _theme.textTheme.labelMedium?.copyWith(
+                                color: _theme.colorScheme.outlineVariant),
                           ),
                           validator: (value) {
                             if (value == '' || value == null) {
@@ -92,7 +92,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Text(
                   'Remember Me',
-                  style: theme.textTheme.labelMedium,
+                  style: _theme.textTheme.labelMedium,
                 ),
                 BlocBuilder<RememberSwitchCubit, RememberSwitchState>(
                   builder: (context, state) {
@@ -119,15 +119,15 @@ class LoginScreen extends StatelessWidget {
             children: [
               Text(
                 "Don't have an account?",
-                style: theme.textTheme.bodyMedium
-                    ?.copyWith(color: theme.colorScheme.onSurface),
+                style: _theme.textTheme.bodyMedium
+                    ?.copyWith(color: _theme.colorScheme.onSurface),
               ),
               TextButton(
                 onPressed: () => context.pushNamed(Routes.REGISTER_ROUTE),
                 child: Text(
                   Values.SIGN_UP_BUTTON_TEXT,
-                  style: theme.textTheme.labelLarge
-                      ?.copyWith(color: theme.colorScheme.onPrimaryContainer),
+                  style: _theme.textTheme.labelLarge
+                      ?.copyWith(color: _theme.colorScheme.onPrimaryContainer),
                 ),
               )
             ],
@@ -139,7 +139,7 @@ class LoginScreen extends StatelessWidget {
                     state is LoginInitial ? Values.SIGN_IN_BUTTON_TEXT : '',
                 buttonChild: state is LoginLoading
                     ? LoadingAnimationWidget.discreteCircle(
-                        color: theme.colorScheme.onPrimaryContainer, size: 35.w)
+                        color: _theme.colorScheme.onPrimaryContainer, size: 35.w)
                     : null,
                 onTap: () {
                   if (state is LoginInitial) {
