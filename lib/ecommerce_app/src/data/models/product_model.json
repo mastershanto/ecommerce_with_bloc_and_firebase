@@ -1,0 +1,44 @@
+{
+  "product_name": "",
+  "product_price": "",
+  "image_gallery" : [
+    {
+      "title": "",
+      "url": ""
+    },
+    {
+      "title": "",
+      "url": ""
+    }
+  ],
+  "variant": [
+    {
+      "category": "Size",
+      "items": [
+        {"title": "S",
+          "description": ""
+        },
+        {
+          "title": "M",
+          "description": ""
+        },
+        {
+          "title": "L",
+          "description": ""
+        },
+        {
+          "title": "XL",
+          "description": ""
+        },
+        {
+          "title": "XXL",
+          "description": ""
+        }
+
+      ]
+    }
+  ],
+  "product_details": "",
+  "brand": ""
+
+}
