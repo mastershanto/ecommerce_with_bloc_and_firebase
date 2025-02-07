@@ -5,7 +5,9 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 
+import '../../utils/asset_manager.dart';
 import '../models/models.dart';
+import '../preferences/local_preferences.dart';
 
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -95,11 +97,11 @@ class AuthRepository {
           email: email, password: password);
       final user = userCredential.user;
 
-      // LocalPreferences.setString('username', user?.displayName ?? 'Unknown');
-      // LocalPreferences.setString('email', user?.email ?? '');
-      // LocalPreferences.setString(
-      //     'photoUrl', user?.photoURL ?? AssetManager.THUMBNAIL_PLACEHOLDER);
-      // LocalPreferences.setString('phoneNumber', user?.phoneNumber ?? '');
+      LocalPreferences.setString('username', user?.displayName ?? 'Unknown');
+      LocalPreferences.setString('email', user?.email ?? '');
+      LocalPreferences.setString(
+          'photoUrl', user?.photoURL ?? AssetManager.THUMBNAIL_PLACEHOLDER);
+      LocalPreferences.setString('phoneNumber', user?.phoneNumber ?? '');
 
       return user;
     } catch (e) {
@@ -122,12 +124,12 @@ class AuthRepository {
       debugPrint('User Inserted, document ${user.uid}');
     });
 
-    // LocalPreferences.setString(
-    //     'username', user.displayName ?? username ?? 'Unknown');
-    // LocalPreferences.setString('email', user.email ?? '');
-    // LocalPreferences.setString(
-    //     'photoUrl', user.photoURL ?? AssetManager.THUMBNAIL_PLACEHOLDER);
-    // LocalPreferences.setString('phoneNumber', user.phoneNumber ?? '');
+    LocalPreferences.setString(
+        'username', user.displayName ?? username ?? 'Unknown');
+    LocalPreferences.setString('email', user.email ?? '');
+    LocalPreferences.setString(
+        'photoUrl', user.photoURL ?? AssetManager.THUMBNAIL_PLACEHOLDER);
+    LocalPreferences.setString('phoneNumber', user.phoneNumber ?? '');
   }
 
   Future<void> signOutUser() async {
