@@ -1,3 +1,4 @@
+import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/repository/product_repository.dart';
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,9 @@ class EcommerceApp extends StatelessWidget {
   List<RepositoryProvider> _repositoryProviders() {
     return [
       RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
+      RepositoryProvider<ProfileRepository>(create: (context) => ProfileRepository()),
+      RepositoryProvider<StoreRepository>(create: (context) => StoreRepository()),
+      RepositoryProvider<ProductRepository>(create: (context) => ProductRepository()),
     ];
   }
 
@@ -36,6 +40,8 @@ class EcommerceApp extends StatelessWidget {
       BlocProvider<RememberSwitchCubit>(create: (context)=>RememberSwitchCubit()),
       BlocProvider<LoginBloc>(create:(context)=>LoginBloc(context.read<AuthRepository>())),
       BlocProvider<SignUpBloc>(create:(context)=>SignUpBloc(context.read<AuthRepository>())),
+      BlocProvider<BrandBloc>(create:(context)=>BrandBloc(context.read<StoreRepository>())..add(RequestFetchBrand())),
+      BlocProvider<ProductBloc>(create:(context)=>ProductBloc(context.read<ProductRepository>())..add(RequestFetchProduct())),
     ];
   }
 

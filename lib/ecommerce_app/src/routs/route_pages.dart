@@ -12,11 +12,19 @@ class RoutePages {
   // use the "context.pushNamed()" , if you need to back this file again.
   // use the "goNamed" for completely replaced
 
+
   static final authService = AuthService();
   static final ROUTER = GoRouter(
-    redirect: (context, state) {
-      if (authService.checkLoginStatus()) {
-        if (state.fullPath == Routes.LOGIN_ROUTE ||
+    initialLocation: Routes.SPLASH_ROUTE,
+
+    redirect: (context, state) async{
+      if (state.fullPath == Routes.SPLASH_ROUTE) {
+        return null;
+      }
+
+      if (await authService.checkLoginStatus()) {
+        if (
+        state.fullPath == Routes.LOGIN_ROUTE ||
             state.fullPath == Routes.REGISTER_ROUTE ||
             state.fullPath == Routes.WELCOME_ROUTE) {
           return Routes.HOME_ROUTE;
@@ -32,7 +40,7 @@ class RoutePages {
       }
     },
     routes: [
-      //forgot_password
+
       GoRoute(
         path: Routes.FORGOT_PASSWORD_ROUTE,
         name: Routes.FORGOT_PASSWORD_ROUTE,
@@ -46,7 +54,9 @@ class RoutePages {
         path: Routes.NEW_PASSWORD_ROUTE,
         name: Routes.NEW_PASSWORD_ROUTE,
         pageBuilder: (context, state) =>
-            const MaterialPage(child: NewPasswordScreen()),
+            MaterialPage(
+              key: state.pageKey,
+                child: const NewPasswordScreen()),
       ),
 
       //resister
@@ -111,12 +121,12 @@ class RoutePages {
         pageBuilder: (context, state) =>
             const MaterialPage(child: CartScreen()),
       ),
-      GoRoute(
-        path: Routes.HOME_ROUTE,
-        name: Routes.HOME_ROUTE,
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: HomeScreen()),
-      ),
+      // GoRoute(
+      //   path: Routes.HOME_ROUTE,
+      //   name: Routes.HOME_ROUTE,
+      //   pageBuilder: (context, state) =>
+      //       const MaterialPage(child: HomeScreen()),
+      // ),
       GoRoute(
         path: Routes.ORDER_CONFIRMED_ROUTE,
         name: Routes.ORDER_CONFIRMED_ROUTE,
@@ -135,15 +145,24 @@ class RoutePages {
         pageBuilder: (context, state) =>
             const MaterialPage(child: ReviewsScreen()),
       ),
+      // login
+            GoRoute(
+              path: Routes.LOGIN_ROUTE,
+              name: Routes.LOGIN_ROUTE,
+              pageBuilder: (context, state) => MaterialPage(
+                key: state.pageKey,
+                child: LoginScreen(),
+              ),
+            ),
       ShellRoute(
           builder: (context, state, child) => Wrapper(child: child),
           routes: [
             //login
             GoRoute(
-              path: Routes.LOGIN_ROUTE,
-              name: Routes.LOGIN_ROUTE,
+              path: Routes.HOME_ROUTE,
+              name: Routes.HOME_ROUTE,
               pageBuilder: (context, state) => MaterialPage(
-                child: LoginScreen(),
+                child: HomeScreen(),
               ),
             ),
           ]),

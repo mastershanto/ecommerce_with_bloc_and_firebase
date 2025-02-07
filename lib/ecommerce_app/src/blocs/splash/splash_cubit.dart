@@ -9,15 +9,16 @@ part 'splash_state.dart';
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(SplashInitial(isLoaded:false));
 final StoreRepository _repository=StoreRepository();
-  void startSplash(){
+  void startSplash() async{
+    await _repository.fetchBrands();
     Future.delayed(const Duration(seconds: 2),() async{
-      try{
-        await _repository.createNewBrand();
-        await _repository.createNewProduct();
-
-      }catch(e){
-      debugPrint(e.toString());
-      }
+      // try{
+      //   await _repository.createNewBrand();
+      //   await _repository.createNewProduct();
+      //
+      // }catch(e){
+      // debugPrint(e.toString());
+      // }
 
       emit(SplashEnd(isLoaded: true));
     });

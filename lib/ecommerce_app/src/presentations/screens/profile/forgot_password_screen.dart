@@ -36,7 +36,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          Assets.CLOUD_LOCK,
+                          AssetManager.CLOUD_LOCK,
                           height: 200,
                           width: 300,
                         ),

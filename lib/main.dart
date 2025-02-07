@@ -3,6 +3,7 @@ import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/ecommerce_app.dar
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'ecommerce_app/src/blocs/blocs.dart';
+import 'ecommerce_app/src/data/preferences/local_preferences.dart';
 import 'firebase_options.dart';
 
 
@@ -19,6 +20,7 @@ Future<void> main() async{
   await Firebase.initializeApp (
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await LocalPreferences().init();
 
   Bloc.observer=EcommerceAppObserver();
   runApp(const EcommerceApp());
