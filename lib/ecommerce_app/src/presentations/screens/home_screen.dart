@@ -166,7 +166,9 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisSpacing: 8,
                                   mainAxisExtent: layout.width * 0.7),
                           itemBuilder: (context, index) => ProductCard(
-                                onItemTap: () {},
+                                onItemTap: () {
+                                  context.goNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                },
                                 productName:
                                     state.products[index].productName ??
                                         "Unknown",
