@@ -4,7 +4,7 @@ export 'profile/new_password_screen.dart';
 export 'profile/signup_screen.dart';
 export 'profile/splash_screen.dart';
 export 'profile/welcome_screen.dart';
-export 'add_cart_screen.dart';
+export 'product_details_screen.dart';
 export 'add_new_payment_card_screen.dart';
 export 'add_review_screen.dart';
 export 'address_screen.dart';

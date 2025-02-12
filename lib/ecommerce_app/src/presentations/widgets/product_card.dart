@@ -21,7 +21,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final themeText = Theme.of(context).textTheme;
+    final themeColor = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onItemTap,
       onDoubleTap: onItemDoubleTap,
@@ -46,7 +47,7 @@ class ProductCard extends StatelessWidget {
                     productName,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.labelLarge
+                    style: themeText.labelLarge
                         ?.copyWith(fontWeight: FontWeight.w600),
                   ),
 
@@ -55,7 +56,7 @@ class ProductCard extends StatelessWidget {
                     productPrice == 0.0
                         ? 'Free'
                         : productPrice?.toStringAsFixed(2) ?? '',
-                    style: theme.textTheme.titleMedium
+                    style: themeText.titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],
