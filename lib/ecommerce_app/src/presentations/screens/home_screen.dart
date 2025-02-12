@@ -8,7 +8,6 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../blocs/blocs.dart';
-import '../../blocs/login/login_bloc.dart';
 import '../../routs/route_pages.dart';
 import '../../utils/asset_manager.dart';
 import '../../utils/values.dart';
@@ -165,9 +164,10 @@ class HomeScreen extends StatelessWidget {
                                   mainAxisSpacing: 8,
                                   crossAxisSpacing: 8,
                                   mainAxisExtent: layout.width * 0.7),
+                                  // mainAxisExtent: layout.width * 0.63),
                           itemBuilder: (context, index) => ProductCard(
                                 onItemTap: () {
-                                  context.goNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                  context.pushNamed(Routes.PRODUCT_DETAILS_ROUTE);
                                 },
                                 productName:
                                     state.products[index].productName ??
