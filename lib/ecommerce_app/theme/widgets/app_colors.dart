@@ -16,7 +16,6 @@ class AppColors {
     700:const Color.fromRGBO(68,120,255, .8),
     800:const Color.fromRGBO(68,120,255, .9),
     900:const Color.fromRGBO(68,120,255, 1),
-
   };
 
   static const Color primaryColor = Color(0xFF4478ff);

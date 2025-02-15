@@ -36,12 +36,12 @@ class AppThemeData {
     brightness: colorScheme.brightness,
     colorScheme: colorScheme,
     textTheme: TextTheme(
-      // displayLarge > displayMedium
+      /*// displayLarge > displayMedium
 // > displaySmall > headlineMedium
 // > headlineSmall > titleLarge
 // > titleMedium > titleSmall
 // > bodyLarge > bodyMedium
-// > bodySmall > labelLarge >labelSmall
+// > bodySmall > labelLarge >labelSmall*/
 
       titleLarge: TextStyle(
           fontSize: 24,
