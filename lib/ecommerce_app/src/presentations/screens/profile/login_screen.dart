@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -38,7 +38,13 @@ class LoginScreen extends StatelessWidget {
                 }
 
                 if (state is LoginFailed) {
-                  Fluttertoast.showToast(msg: state.message);
+                  // Fluttertoast.showToast(msg: state.message);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
                 }
               },
               builder: (context, state) {

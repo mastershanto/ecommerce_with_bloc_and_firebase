@@ -1,7 +1,7 @@
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/utils/form_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -114,7 +114,13 @@ class SignUpScreen extends StatelessWidget {
                         context.goNamed(Routes.HOME_ROUTE);
                       }
                       if(state is SignUpFailedState){
-                        Fluttertoast.showToast(msg: state.message);
+                        // Fluttertoast.showToast(msg: state.message);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       }
                     },
                   ),

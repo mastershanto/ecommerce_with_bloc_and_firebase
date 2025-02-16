@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
@@ -56,7 +56,13 @@ class WelcomeScreen extends StatelessWidget {
             },
             listener: (context, state) {
               if(state is LoginSuccess){
-                Fluttertoast.showToast(msg: 'Login Success');
+                // Fluttertoast.showToast(msg: 'Login Success');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Login Success"),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
                 Future.delayed(const Duration(milliseconds: 500), (){
                   context.goNamed(Routes.HOME_ROUTE);
                 });
