@@ -90,10 +90,10 @@ class RoutePages {
 
       //home
       GoRoute(
-        path: Routes.ADD_TO_CART_ROUTE,
-        name: Routes.ADD_TO_CART_ROUTE,
+        path: Routes.PRODUCT_DETAILS_ROUTE,
+        name: Routes.PRODUCT_DETAILS_ROUTE,
         pageBuilder: (context, state) =>
-            const MaterialPage(child: AddCartScreen()),
+            const MaterialPage(child: ProductDetailsScreen()),
       ),
       //home
       GoRoute(

@@ -4,6 +4,7 @@ import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/dummy/du
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/models/product_model.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/category_model.dart';
 import '../models/models.dart';
 
 class StoreRepository {
@@ -29,7 +30,11 @@ class StoreRepository {
 
     try{
       for(var product in dummyProducts){
-        await _firestore.collection("products").add(product.toJson());
+        final ref= await _firestore.collection("products").add(product.toJson());
+        // final ref = await _firestore.collection("products").doc();
+        await ref.update({
+          'product_id': ref.id, // Store document ID inside Firestore
+        });
       }
     }catch(e){
       throw Exception(e);
@@ -53,6 +58,23 @@ class StoreRepository {
       return brandList;
     }
 
+  Future<void> fetchAllCategory()async{}
 
+  Future<CategoryModel?> fetchSingleCategory(String categoryId)async{
+
+    try {
+      final data = await _firestore.collection("category").doc(categoryId).get();
+      if(data.data() != null){
+        final category = CategoryModel.fromJson(data.data()!);
+        return category;
+      }
+      else {
+        return null;
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+
+  }
   }
 

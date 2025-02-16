@@ -7,5 +7,6 @@ export 'splash/splash_cubit.dart';
 export 'store/brand_bloc.dart';
 export 'store/product_bloc.dart';
 export 'bloc_ecommerce_observer.dart';
+export 'store/category_bloc.dart';
 
 

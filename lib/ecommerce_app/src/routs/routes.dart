@@ -8,7 +8,7 @@ class Routes {
   static const String SPLASH_ROUTE = '/';
   static const String WELCOME_ROUTE = '/welcome';
   static const String ADD_NEW_PAYMENT_CARD_ROUTE = '/add_new_payment_card';
-  static const String ADD_TO_CART_ROUTE = '/add_to_cart';
+  static const String PRODUCT_DETAILS_ROUTE = '/product_details';
   static const String ADD_REVIEW_ROUTE = '/add_review';
   static const String ADDRESS_ROUTE = '/address';
   static const String CART_ROUTE = '/cart';

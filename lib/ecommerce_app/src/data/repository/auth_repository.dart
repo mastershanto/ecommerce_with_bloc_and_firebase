@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-
 import '../../utils/asset_manager.dart';
 import '../models/models.dart';
 import '../preferences/local_preferences.dart';
@@ -110,6 +108,22 @@ class AuthRepository {
     }
   }
 
+  Future<User?> signUpWithEmail(
+      String email, String password, String username) async {
+    try {
+      final credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      final user = credential.user;
+      if (user != null) {
+        await createUserInDatabase(user, username);
+      }
+      return user;
+    } catch (e) {
+      debugPrint("Error: $e");
+      throw Exception(e);
+    }
+  }
+
   Future<void> createUserInDatabase(User user, String? username) async {
     final data = UserModel(
         userName: user.displayName ?? username,
@@ -136,19 +150,4 @@ class AuthRepository {
     await _auth.signOut();
   }
 
-  Future<User?> signUpWithEmail(
-      String email, String password, String username) async {
-    try {
-      final credential = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      final user = credential.user;
-      if (user != null) {
-        await createUserInDatabase(user, username);
-      }
-      return user;
-    } catch (e) {
-      debugPrint("Error: $e");
-      throw Exception(e);
-    }
-  }
 }

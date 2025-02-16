@@ -42,6 +42,8 @@ class EcommerceApp extends StatelessWidget {
       BlocProvider<SignUpBloc>(create:(context)=>SignUpBloc(context.read<AuthRepository>())),
       BlocProvider<BrandBloc>(create:(context)=>BrandBloc(context.read<StoreRepository>())..add(RequestFetchBrand())),
       BlocProvider<ProductBloc>(create:(context)=>ProductBloc(context.read<ProductRepository>())..add(RequestFetchProduct())),
+      BlocProvider<CategoryBloc>(create:(context)=>CategoryBloc(context.read<StoreRepository>())),
+
     ];
   }
 

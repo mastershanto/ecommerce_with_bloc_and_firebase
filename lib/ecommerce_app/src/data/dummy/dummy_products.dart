@@ -4,6 +4,7 @@ import '../models/brand_model.dart';
 
 final List<ProductModel> dummyProducts = [
   ProductModel(
+    productId: "",
       productName: "Winter T-Shirt",
       productPrice: 200.00,
       imageGallery: [
@@ -32,8 +33,11 @@ GSM : 260-280 GSM
 Gender : Men
 Color : White
 """,
-      brand: ""),
+      brand: "",
+    categoryId: "",
+  ),
   ProductModel(
+    productId: "",
       productName: "Winter Shoe",
       productPrice: 450.00,
       imageGallery: [
@@ -63,5 +67,6 @@ GSM : 260-280 GSM
 Gender : Men
 Color : White
 """,
-      brand: ""),
+      brand: "",
+  categoryId: ""),
 ];

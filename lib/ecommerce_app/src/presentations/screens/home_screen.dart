@@ -12,10 +12,25 @@ import '../../routs/route_pages.dart';
 import '../../utils/asset_manager.dart';
 import '../../utils/values.dart';
 import '../widgets/widgets.dart';
+@override
+// void initState() {
+//   super.initState();
+//   context.read<ProductBloc>().add(RequestFetchProduct());
+// }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+void initState() {
+  super.initState();
+  context.read<ProductBloc>().add(RequestFetchProduct());
+}
   @override
   Widget build(BuildContext context) {
     final layout = MediaQuery.of(context).size;
@@ -167,7 +182,9 @@ class HomeScreen extends StatelessWidget {
                                   // mainAxisExtent: layout.width * 0.63),
                           itemBuilder: (context, index) => ProductCard(
                                 onItemTap: () {
-                                  context.pushNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                  // context.pushNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                  context.goNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                  context.read<ProductBloc>().add(RequestFetchSingleProduct(state.products[index].productId));
                                 },
                                 productName:
                                     state.products[index].productName ??

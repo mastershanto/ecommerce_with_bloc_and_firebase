@@ -24,3 +24,12 @@ final class ProductFetchFailed extends ProductState {
   @override
   List<Object?> get props => [message];
 }
+
+final class SingleProductFetchSuccess extends ProductState {
+  final ProductModel products;
+  final String  productId;
+  SingleProductFetchSuccess(this.productId, this.products);
+
+  @override
+  List<Object?> get props => [productId, products];
+}

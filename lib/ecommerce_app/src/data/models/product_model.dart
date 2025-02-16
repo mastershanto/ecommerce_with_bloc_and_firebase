@@ -9,38 +9,46 @@ ProductModel productModelFromJson(String str) => ProductModel.fromJson(json.deco
 String productModelToJson(ProductModel data) => json.encode(data.toJson());
 
 class ProductModel {
+  String productId;
   final String? productName;
   final double? productPrice;
   final List<ImageGallery>? imageGallery;
   final List<Variant>? variant;
   final String? productDetails;
   final String? brand;
+  final String? categoryId;
 
   ProductModel({
+    required this.productId,
     this.productName,
     this.productPrice,
     this.imageGallery,
     this.variant,
     this.productDetails,
     this.brand,
+    this.categoryId,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    productId: json["product_id"],
     productName: json["product_name"],
     productPrice: json["product_price"],
     imageGallery: json["image_gallery"] == null ? [] : List<ImageGallery>.from(json["image_gallery"]!.map((x) => ImageGallery.fromJson(x))),
     variant: json["variant"] == null ? [] : List<Variant>.from(json["variant"]!.map((x) => Variant.fromJson(x))),
     productDetails: json["product_details"],
     brand: json["brand"],
+    categoryId: json["category_id"],
   );
 
   Map<String, dynamic> toJson() => {
+    "product_id": productId,
     "product_name": productName,
     "product_price": productPrice,
     "image_gallery": imageGallery == null ? [] : List<dynamic>.from(imageGallery!.map((x) => x.toJson())),
     "variant": variant == null ? [] : List<dynamic>.from(variant!.map((x) => x.toJson())),
     "product_details": productDetails,
     "brand": brand,
+    "category_id":categoryId,
   };
 }
 
@@ -103,3 +111,7 @@ class Item {
     "description": description,
   };
 }
+
+
+
+

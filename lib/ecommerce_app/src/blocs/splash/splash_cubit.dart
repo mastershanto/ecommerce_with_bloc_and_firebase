@@ -13,9 +13,9 @@ final StoreRepository _repository=StoreRepository();
     await _repository.fetchBrands();
     Future.delayed(const Duration(seconds: 2),() async{
       // try{
-      //   await _repository.createNewBrand();
+      // //   await _repository.createNewBrand();
       //   await _repository.createNewProduct();
-      //
+      // //
       // }catch(e){
       // debugPrint(e.toString());
       // }

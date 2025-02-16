@@ -10,6 +10,7 @@ class NewPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _theme=Theme.of(context);
     final formKey = GlobalKey<FormState>();
 
     return Scaffold(
@@ -20,7 +21,7 @@ class NewPasswordScreen extends StatelessWidget {
         children: [
           Text(
             "New Password",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: _theme.textTheme.titleLarge,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -42,11 +43,11 @@ class NewPasswordScreen extends StatelessWidget {
                           },
                           decoration: InputDecoration(
                             label: const Text("New Password"),
-                            labelStyle: Theme.of(context)
+                            labelStyle: _theme
                                 .textTheme
                                 .labelMedium
                                 ?.copyWith(
-                                    color: Theme.of(context)
+                                    color: _theme
                                         .colorScheme
                                         .outlineVariant),
                           ),
@@ -61,11 +62,11 @@ class NewPasswordScreen extends StatelessWidget {
                           },
                           decoration: InputDecoration(
                             label: const Text("Confirm Password"),
-                            labelStyle: Theme.of(context)
+                            labelStyle: _theme
                                 .textTheme
                                 .labelMedium
                                 ?.copyWith(
-                                    color: Theme.of(context)
+                                    color: _theme
                                         .colorScheme
                                         .outlineVariant),
                           ),
