@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "825265177541",
+    "project_id": "bloc-ecommerce-180824",
+    "storage_bucket": "bloc-ecommerce-180824.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825265177541:android:381d03504d1646945d01ac",
+        "android_client_info": {
+          "package_name": "com.example.bloc_clean_architecture_ecommerce_180824"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825265177541-2lke87u92ro4psrb07iqf2s0fbna3emf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bloc_clean_architecture_ecommerce_180824",
+            "certificate_hash": "f6c52dfb8b5166a504822889a358e67722ea4b3f"
+          }
+        },
+        {
+          "client_id": "825265177541-vkdo5v8rcoq2mqb47kh4t8nfiakvtim1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvi6Oh2yxeRsAuq0rZ8bds9WAhujtXyA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825265177541-vkdo5v8rcoq2mqb47kh4t8nfiakvtim1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "825265177541-0ivnr9u3uau44m7vtc59kqok882a55un.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blocCleanArchitectureEcommerce180824"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825265177541:android:47b9ae69d20580d85d01ac",
+        "android_client_info": {
+          "package_name": "com.masterShanto.ecommerce_with_bloc_and_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825265177541-eisk7dk6jlep6pf5b3qhufvm3ihodk1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.masterShanto.ecommerce_with_bloc_and_firebase",
+            "certificate_hash": "48f885a278e6ce3c7e38fefb59e3494d3f0bc2cd"
+          }
+        },
+        {
+          "client_id": "825265177541-vkdo5v8rcoq2mqb47kh4t8nfiakvtim1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvi6Oh2yxeRsAuq0rZ8bds9WAhujtXyA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825265177541-vkdo5v8rcoq2mqb47kh4t8nfiakvtim1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "825265177541-0ivnr9u3uau44m7vtc59kqok882a55un.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blocCleanArchitectureEcommerce180824"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
