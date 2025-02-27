@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'src/blocs/blocs.dart';
-import 'src/blocs/login/login_bloc.dart';
-import 'src/presentations/screens/screens.dart';
+import 'src/blocs/Authentications/login_bloc.dart';
 import 'src/routs/route_pages.dart';
 import 'theme/theme.dart';
 
@@ -43,6 +42,7 @@ class EcommerceApp extends StatelessWidget {
       BlocProvider<BrandBloc>(create:(context)=>BrandBloc(context.read<StoreRepository>())..add(RequestFetchBrand())),
       BlocProvider<ProductBloc>(create:(context)=>ProductBloc(context.read<ProductRepository>())..add(RequestFetchProduct())),
       BlocProvider<CategoryBloc>(create:(context)=>CategoryBloc(context.read<StoreRepository>())),
+      BlocProvider<RatingBloc>(create:(context)=>RatingBloc(context.read<ProductRepository>())),
 
     ];
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/product_model.dart';
+import '../models/review_model.dart';
 
 class ProductRepository{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -9,7 +10,7 @@ class ProductRepository{
   Future<List<ProductModel>> fetchProducts() async {
     final List<ProductModel> productList = [];
     final productsSnapshot = await _firestore.collection("products").get();
-    DocumentReference ref = FirebaseFirestore.instance.collection('products').doc();
+    // DocumentReference ref = FirebaseFirestore.instance.collection('products').doc();
 
     try {
       for (var product in productsSnapshot.docs) {
@@ -37,6 +38,24 @@ class ProductRepository{
 
     } catch (e) {
       debugPrint('Error: $e');
+      throw Exception(e);
+    }
+  }
+
+
+  Future<ReviewModel?> submitReviewAndRating(ReviewModel review) async {
+    try {
+      final data = await _firestore.collection('reviews').add(review.toJson());
+
+      final document = await data.get();
+      if(document.data() != null){
+        final review = ReviewModel.fromJson(document.data()!);
+        return review;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      debugPrint("Error: $e");
       throw Exception(e);
     }
   }

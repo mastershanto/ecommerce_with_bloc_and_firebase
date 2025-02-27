@@ -1,4 +1,5 @@
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/services/auth_service.dart';
+import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/presentations/screens/explore_reviews_screen.dart';
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/presentations/screens/screens.dart';
 import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/presentations/screens/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -104,11 +105,31 @@ class RoutePages {
       ),
       //home
       GoRoute(
-        path: Routes.ADD_REVIEW_ROUTE,
-        name: Routes.ADD_REVIEW_ROUTE,
+        path: Routes.EXPLORE_REVIEWS_ROUTE,
+        name: Routes.EXPLORE_REVIEWS_ROUTE,
         pageBuilder: (context, state) =>
-            const MaterialPage(child: AddReviewScreen()),
+            const MaterialPage(child: ExploreReviewsScreen()),
       ),
+
+      // GoRoute(
+      //   path: Routes.ADD_REVIEW_ROUTE,
+      //   name: Routes.ADD_REVIEW_ROUTE,
+      //   pageBuilder: (context, state) =>
+      //   const MaterialPage(child: ExploreReviewsScreen()),
+      // ),
+
+      GoRoute(
+          path: Routes.ADD_REVIEW_ROUTE,
+          name: Routes.ADD_REVIEW_ROUTE,
+          pageBuilder: (context, state) {
+            final obj = state.extra as Map;
+
+            print(obj);
+            return MaterialPage(
+                child: AddReviewScreen(
+                  id: obj['id'],
+                ));
+          }),
       GoRoute(
         path: Routes.ADDRESS_ROUTE,
         name: Routes.ADDRESS_ROUTE,

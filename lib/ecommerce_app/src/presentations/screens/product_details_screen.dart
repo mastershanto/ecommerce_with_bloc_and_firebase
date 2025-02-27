@@ -85,12 +85,12 @@ class ProductDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Price',
+                          state.products.productName ?? "",
                           style: themeText.labelSmall
                               ?.copyWith(color: themeColor.outline),
                         ),
                         Text(
-                          '\$200.00',
+                          '\$${state.products.productPrice}',
                           style: themeText.titleLarge?.copyWith(
                               color: themeColor.onSurface,
                               fontWeight: FontWeight.w800),
@@ -121,27 +121,25 @@ class ProductDetailsScreen extends StatelessWidget {
                               color: themeColor.onSurface,
                               fontWeight: FontWeight.w600),
                         ),
-                        ReadMoreText(
-                          "ljldjfljlskdjf dsfjl dsfjl ldjsf lkjdlf jdfl dfjljdf l"
-                                  "ljdfl "
-                                  "dfljljfl "
-                                  "sjdfljlksdfj lsdjfl"
-                                  "dsjfljlkjdf"
-                                  "" ??
-                              'No Details Available',
-                          style: themeText.bodyMedium
-                              ?.copyWith(color: themeColor.outline),
-                          textAlign: TextAlign.justify,
-                          trimMode: TrimMode.Line,
-                          trimLines: 5,
-                          moreStyle: themeText.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: themeColor.tertiary),
-                          lessStyle: themeText.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: themeColor.tertiary),
-                          trimCollapsedText: 'Show More',
-                          trimExpandedText: 'Show Less',
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: ReadMoreText(
+                            "${state.products.productDetails}" ??
+                                'No Details Available',
+                            style: themeText.bodyMedium
+                                ?.copyWith(color: themeColor.outline),
+                            textAlign: TextAlign.justify,
+                            trimMode: TrimMode.Line,
+                            trimLines: 5,
+                            moreStyle: themeText.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: themeColor.tertiary),
+                            lessStyle: themeText.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: themeColor.tertiary),
+                            trimCollapsedText: 'Show More',
+                            trimExpandedText: 'Show Less',
+                          ),
                         )
                       ],
                     ),
@@ -188,8 +186,9 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            final id = 20;
-                            // context.pushNamed(Routes.ADD_REVEIW, extra: {'id':id});
+                            final id = state.productId;
+                            context.pushNamed(Routes.ADD_REVIEW_ROUTE,
+                                extra: {'id': id});
                           },
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
@@ -242,28 +241,33 @@ class ProductDetailsScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            tileColor: themeColor.surfaceContainerHighest,
-            title: Text(
-              'Total Price',
-              style: themeText.labelLarge?.copyWith(
-                color: themeColor.onSurfaceVariant,
-                fontWeight: FontWeight.w600,
+              tileColor: themeColor.surfaceContainerHighest,
+              title: Text(
+                'Total Price',
+                style: themeText.labelLarge?.copyWith(
+                  color: themeColor.onSurfaceVariant,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            subtitle: Text(
-              'with VAT,SD',
-              style: themeText.labelSmall?.copyWith(
-                color: themeColor.outline,
-                fontWeight: FontWeight.w300,
+              subtitle: Text(
+                'with VAT,SD',
+                style: themeText.labelSmall?.copyWith(
+                  color: themeColor.outline,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-            ),
-            trailing: Text(
-              '210',
-              style: themeText.labelLarge?.copyWith(
-                color: themeColor.onSurfaceVariant,
-                fontWeight: FontWeight.w900,
+              trailing: BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  final vat=state is SingleProductFetchSuccess? state.products.productPrice??0.00+20:0;
+                  return Text(
+                    state is SingleProductFetchSuccess? "\$${(state.products.productPrice??0.00)+vat}": "",
+                    style: themeText.labelLarge?.copyWith(
+                      color: themeColor.onSurfaceVariant,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  );
+                },
               ),
-            ),
           ),
           FullWidthButton(
             buttonText: 'Add to Cart',

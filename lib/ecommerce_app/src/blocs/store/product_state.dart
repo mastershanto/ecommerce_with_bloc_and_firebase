@@ -17,14 +17,6 @@ final class ProductFetchSuccess extends  ProductState {
   List<Object?> get props => [products];
 }
 
-final class ProductFetchFailed extends ProductState {
-  final String message;
-  ProductFetchFailed(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
-
 final class SingleProductFetchSuccess extends ProductState {
   final ProductModel products;
   final String  productId;
@@ -33,3 +25,12 @@ final class SingleProductFetchSuccess extends ProductState {
   @override
   List<Object?> get props => [productId, products];
 }
+
+final class ProductFetchFailed extends ProductState {
+  final String message;
+  ProductFetchFailed(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
