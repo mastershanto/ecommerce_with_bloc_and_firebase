@@ -11,7 +11,7 @@ class ProductVariantCategoryItem extends StatelessWidget {
   });
 
   final String title;
-  final List<String> items;
+  final List<Item> items;
   // final List<VariantItem> items;
 
 
@@ -49,7 +49,7 @@ class ProductVariantCategoryItem extends StatelessWidget {
                 child: Card(
                   child: Center(
                     child: Text(
-                      items[index-1] ?? '',
+                      items[index-1].title ?? '',
                       style: theme.textTheme.titleLarge
                           ?.copyWith(fontWeight: FontWeight.w600),
                     ),

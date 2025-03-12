@@ -14,6 +14,8 @@ class ProductReviewCard extends StatelessWidget {
     this.date,
     this.ratingPoint,
     this.review,
+
+
   });
 
   final String? imageUrl;
@@ -21,6 +23,7 @@ class ProductReviewCard extends StatelessWidget {
   final String? date;
   final double? ratingPoint;
   final String? review;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,7 @@ class ProductReviewCard extends StatelessWidget {
           title: Text(
             name ?? 'Unknown',
             style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.onBackground,
+                color: theme.colorScheme.onSurface,
                 fontWeight: FontWeight.bold),
             overflow: TextOverflow.ellipsis,
           ),
@@ -65,7 +68,7 @@ class ProductReviewCard extends StatelessWidget {
                 text: TextSpan(
                   text: ratingPoint?.toStringAsFixed(1),
                   style: theme.textTheme.labelLarge?.copyWith(
-                    color: theme.colorScheme.onBackground,
+                    color: theme.colorScheme.onSurface,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [

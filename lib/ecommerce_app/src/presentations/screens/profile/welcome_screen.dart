@@ -49,7 +49,8 @@ class WelcomeScreen extends StatelessWidget {
                     //     onPressed: () => context.read<LoginBloc>().add(RequestTwitterLogin())),
                     // const Gap(10),
                     SocialLoginButton(
-                        buttonType: SocialLoginButtonType.google, onPressed: () => context.read<LoginBloc>().add(RequestGoogleLogin())),
+                        buttonType: SocialLoginButtonType.google,
+                        onPressed: () => context.read<LoginBloc>().add(RequestGoogleLogin())),
                   ],
                 ),
               );
@@ -60,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text("Login Success"),
-                    duration: Duration(seconds: 2),
+                    duration: Duration(seconds: 1),
                   ),
                 );
                 Future.delayed(const Duration(milliseconds: 500), (){
@@ -82,7 +83,10 @@ class WelcomeScreen extends StatelessWidget {
                         color: _theme.colorScheme.onSurface),
                   ),
                   TextButton(
-                    onPressed: () => context.pushNamed(Routes.LOGIN_ROUTE),
+                    onPressed: (){
+                      context.read<LoginBloc>().add(RequestNewScreenLogin());
+                      context.pushNamed(Routes.LOGIN_ROUTE);
+                    },
                     child: Text(
                       Values.SIGN_IN_BUTTON_TEXT,
                       style: _theme.textTheme.labelLarge?.copyWith(

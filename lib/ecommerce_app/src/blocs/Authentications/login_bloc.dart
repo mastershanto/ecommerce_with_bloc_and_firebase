@@ -13,6 +13,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc(this.repository) : super(LoginInitial()) {
 
+
+    on<RequestNewScreenLogin>((event, emit) =>emit(LoginInitial()));
+
     on<RequestGoogleLogin>((event, emit) async {
       emit(LoginLoading());
       try{
@@ -64,6 +67,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginFailed(e.toString()));
       }
     });
+
+
+
 
 
     on<RequestSignOut>((event, emit) async {

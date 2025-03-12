@@ -1,24 +1,3 @@
-/*
-
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
-class AddReviewScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final extra = GoRouterState.of(context).extra as Map<String, dynamic>?;
-
-    final id = extra?['id']; // Extract the ID
-
-    return Scaffold(
-      appBar: AppBar(title: Text("Add Review")),
-      body: Center(child: Text("Review for ID: $id")),
-    );
-  }
-}
-*/
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -41,19 +20,20 @@ class AddReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    // final layout = MediaQuery.of(context);
+    final themeText = Theme.of(context).textTheme;
+    final themeColor = Theme.of(context).colorScheme;
+    final layout = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Add Review',
-          style: theme.textTheme.titleLarge,
+          style: themeText.titleLarge,
         ),
         centerTitle: true,
         leading: IconButton.filled(
           style: ButtonStyle(
             backgroundColor:
-            WidgetStatePropertyAll(theme.colorScheme.surfaceContainerHighest),
+                WidgetStatePropertyAll(themeColor.surfaceContainerHighest),
           ),
           onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back),
@@ -69,8 +49,8 @@ class AddReviewScreen extends StatelessWidget {
                 children: [
                   Text(
                     'How was your experience ?',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.onSurface,
+                    style: themeText.titleMedium?.copyWith(
+                      color: themeColor.onSurface,
                     ),
                   ),
                   TextField(
@@ -79,60 +59,93 @@ class AddReviewScreen extends StatelessWidget {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide.none),
-                        fillColor: theme.colorScheme.surfaceContainerHighest,
+                        fillColor: themeColor.surfaceContainerHighest,
                         filled: true,
                         hintText: 'Describe your experience?',
-                        hintStyle: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.outline,
+                        hintStyle: themeText.bodySmall?.copyWith(
+                          color: themeColor.outline,
                         )),
                     maxLines: 10,
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                    style: themeText.labelSmall?.copyWith(
+                      color: themeColor.onSurfaceVariant,
                     ),
                   ),
                   Gap(20.h),
                   Text(
                     'Star',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.onSurface,
+                    style: themeText.titleMedium?.copyWith(
+                      color: themeColor.onSurface,
                     ),
                   ),
                   Gap(10.h),
-                  Row(
+                  BlocBuilder<RatingBloc, RatingState>(
+  builder: (context, state) {
+    return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       RatingBar.builder(
-                        initialRating: context.read<RatingBloc>().rating,
+                        initialRating: 0.0,
+                        // initialRating: context.read<RatingBloc>().rating,
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: true,
                         itemCount: 5,
                         itemPadding:
-                        const EdgeInsets.symmetric(horizontal: 4.0),
+                            const EdgeInsets.symmetric(horizontal: 4.0),
                         itemBuilder: (context, _) => const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),
-                        onRatingUpdate: (rating) => context
-                            .read<RatingBloc>()
-                            .add(UpdateRatingPoint(rating)),
+                        onRatingUpdate: (rating) {
+                          context.read<RatingBloc>().add(UpdateRatingPoint(rating));
+                          // context.read<RatingBloc>().rating = rating;
+                        },
                       ),
+                      Gap(20),
+                      Text(
+                        "${state is RatingPointChangedSuccessfully ? state.ratingPoint : context.read<RatingBloc>().rating.toString()}",
+                          style: themeText.titleLarge!.copyWith(
+                              fontSize: 38,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.amber)),
+                      // BlocBuilder<RatingBloc, RatingState>(
+                      //   builder: (context, state)=> Text(
+                      //       state is RatingPointChangedSuccessfully ? state.ratingPoint : context.read<RatingBloc>().rating.toString(),
+                      //         style: themeText.titleLarge!.copyWith(
+                      //             fontSize: 38,
+                      //             fontWeight: FontWeight.bold,
+                      //             color: Colors.amber)),
+                      // )
                     ],
-                  )
+                  );
+  },
+),
+                  Gap(20.h),
+                  SizedBox(
+                    height: layout.size.height * .14,
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return;
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        itemCount: 10),
+                  ),
                 ],
               ),
             );
           } else if (state is RatingLoading) {
             return Center(
               child: CircularProgressIndicator(
-                color: theme.colorScheme.primary,
+                color: themeColor.primary,
               ),
             );
           } else if (state is RatingSubmitSuccess) {
             return AlertDialog(
               title: Text(
                 'Review Submitted!',
-                style: theme.textTheme.titleMedium,
+                style: themeText.titleMedium,
               ),
               content: LottieBuilder.asset(AssetManager.SUCCESS_ANIM),
             );
@@ -146,14 +159,14 @@ class AddReviewScreen extends StatelessWidget {
               SnackBar(
                 content: Text(
                   'Thanks for submitting review!',
-                  style: theme.textTheme.labelMedium
-                      ?.copyWith(color: theme.colorScheme.onErrorContainer),
+                  style: themeText.labelMedium
+                      ?.copyWith(color: themeColor.onErrorContainer),
                 ),
                 backgroundColor: Colors.green,
               ),
             );
 
-            Future.delayed(const Duration(seconds: 2), (){
+            Future.delayed(const Duration(seconds: 2), () {
               context.pushReplacement(Routes.EXPLORE_REVIEWS_ROUTE);
             });
           }
@@ -163,10 +176,10 @@ class AddReviewScreen extends StatelessWidget {
               SnackBar(
                 content: Text(
                   'Thanks for submitting review!',
-                  style: theme.textTheme.labelMedium
-                      ?.copyWith(color: theme.colorScheme.onErrorContainer),
+                  style: themeText.labelMedium
+                      ?.copyWith(color: themeColor.onErrorContainer),
                 ),
-                backgroundColor: theme.colorScheme.errorContainer,
+                backgroundColor: themeColor.errorContainer,
               ),
             );
           }
@@ -179,12 +192,12 @@ class AddReviewScreen extends StatelessWidget {
           return FullWidthButton(
               onTap: () => state is RatingInitial
                   ? context.read<RatingBloc>().add(
-                SubmitReview(state.reviewController.text, id),
-              )
+                        SubmitReview(state.reviewController.text, id),
+                      )
                   : null,
               buttonChild: state is RatingLoading
                   ? LoadingAnimationWidget.staggeredDotsWave(
-                  color: theme.colorScheme.onPrimaryContainer, size: 30)
+                      color: themeColor.onPrimaryContainer, size: 30)
                   : null,
               buttonText: 'Submit Review');
         },

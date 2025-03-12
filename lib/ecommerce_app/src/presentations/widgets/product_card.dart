@@ -15,7 +15,7 @@ class ProductCard extends StatelessWidget {
 
   final String? productThumbnail;
   final String productName;
-  final double? productPrice;
+  final num? productPrice;
   final void Function()? onItemTap;
   final void Function()? onItemDoubleTap;
 

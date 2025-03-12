@@ -26,6 +26,7 @@ class ProfileRepository {
       debugPrint("Error Signing in with google: $error");
       return null;
     }
+    return null;
   }
 
 

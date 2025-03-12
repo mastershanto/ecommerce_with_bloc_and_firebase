@@ -21,3 +21,15 @@ final class SubmitReview extends RatingEvent {
   @override
   List<Object> get props=>[review, productId];
 }
+
+class FetchProductReview extends RatingEvent{
+  final String productId;
+  const FetchProductReview(this.productId);
+  @override
+  List<Object> get props=>[productId];
+}
+class RequestAddReview extends RatingEvent{}
+class RatingPointChanged extends RatingEvent{}
+class AddReviewPhoto extends RatingEvent{}
+
+

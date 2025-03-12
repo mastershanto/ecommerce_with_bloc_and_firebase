@@ -35,6 +35,7 @@ Color : White
 """,
       brand: "",
     categoryId: "",
+    vatSd:5.00,
   ),
   ProductModel(
     productId: "",
@@ -68,5 +69,7 @@ Gender : Men
 Color : White
 """,
       brand: "",
-  categoryId: ""),
+  categoryId: "",
+    vatSd:5.00,
+  ),
 ];

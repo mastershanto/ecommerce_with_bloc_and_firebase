@@ -7,12 +7,14 @@ abstract class LoginState extends Equatable{
 }
 
 class LoginInitial extends LoginState {
+  // LoginInitial(this.emailController, this.passwordController);
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   List<Object?> get props => [emailController, passwordController];
 }
+// class LoginNewScreen extends LoginState {}
 class LoginLoading extends LoginState {}
 class LoginSuccess extends LoginState {}
 

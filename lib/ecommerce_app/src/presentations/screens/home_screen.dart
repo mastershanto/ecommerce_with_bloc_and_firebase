@@ -182,9 +182,16 @@ void initState() {
                                   // mainAxisExtent: layout.width * 0.63),
                           itemBuilder: (context, index) => ProductCard(
                                 onItemTap: () {
+                                  debugPrint("Product Id: ${state.products[index].productId}");
                                   // context.pushNamed(Routes.PRODUCT_DETAILS_ROUTE);
                                   context.goNamed(Routes.PRODUCT_DETAILS_ROUTE);
+                                  if(state is! ReviewFetchSuccess){
+
+                                    debugPrint("${state.products[index].productId}");
+                                    context.read<RatingBloc>().add(FetchProductReview(state.products[index].productId));
+                                  }
                                   context.read<ProductBloc>().add(RequestFetchSingleProduct(state.products[index].productId));
+                                  // context.read<CategoryBloc>().add(FetchSingleCategory(state.products[index].categoryId??""));
                                 },
                                 productName:
                                     state.products[index].productName ??

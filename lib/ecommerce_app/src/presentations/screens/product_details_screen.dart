@@ -1,15 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_with_bloc_and_firebase/ecommerce_app/src/data/repository/product_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../blocs/blocs.dart';
 import '../../data/models/product_model.dart';
+import '../../data/models/review_model.dart';
 import '../../routs/route_pages.dart';
 import '../../utils/asset_manager.dart';
 import '../widgets/widgets.dart';
@@ -106,7 +110,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
 
                   // variants gallery
-                  _buildProductVariantGallery(null),
+                  _buildProductVariantGallery(state.products.variant),
 
                   // product description
                   Padding(
@@ -164,16 +168,33 @@ class ProductDetailsScreen extends StatelessWidget {
                           ),
                         ],
                       )),
-                  const Column(
-                    children: [
-                      ProductReviewCard(
-                        name: 'Javed Umar',
-                        date: '13 Sep 2023',
-                        ratingPoint: 3.8,
-                        review:
-                            'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words',
-                      )
-                    ],
+
+                  BlocBuilder<RatingBloc, RatingState>(
+                    builder: (context, state) {
+
+
+                      return Column(
+                        children: state is ReviewFetchSuccess
+                            ? List.generate(
+                                state.reviews.length,
+                                (index) {
+                                  return ProductReviewCard(
+                                    imageUrl: state.reviews[index].userProfilePic,
+                                    name: state.reviews[index].userName,
+                                    // date: DateFormat('yyyy-MM-dd').format(state.reviews[index].createdAt).toDate(),
+                                    date: DateFormat(DateFormat.YEAR_MONTH_DAY)
+                                        .format(
+                                        DateTime.fromMillisecondsSinceEpoch(
+                                            state.reviews[index].createdAt
+                                                .millisecondsSinceEpoch)),
+                                    ratingPoint: state.reviews[index].rating,
+                                    review: state.reviews[index].review,
+                                  );
+                                },
+                              )
+                            : [],
+                      );
+                    },
                   ),
 
                   Gap(10.h),
@@ -186,6 +207,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            context.read<RatingBloc>().add(RequestAddReview());
                             final id = state.productId;
                             context.pushNamed(Routes.ADD_REVIEW_ROUTE,
                                 extra: {'id': id});
@@ -232,7 +254,7 @@ class ProductDetailsScreen extends StatelessWidget {
             );
           } else {
             return const Column(
-              children: [Text("Not Found any page")],
+              children: [Text("Not found any page")],
             );
           }
         },
@@ -241,33 +263,40 @@ class ProductDetailsScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-              tileColor: themeColor.surfaceContainerHighest,
-              title: Text(
-                'Total Price',
-                style: themeText.labelLarge?.copyWith(
-                  color: themeColor.onSurfaceVariant,
-                  fontWeight: FontWeight.w600,
-                ),
+            tileColor: themeColor.surfaceContainerHighest,
+            title: Text(
+              'Total Price',
+              style: themeText.labelLarge?.copyWith(
+                color: themeColor.onSurfaceVariant,
+                fontWeight: FontWeight.w600,
               ),
-              subtitle: Text(
-                'with VAT,SD',
-                style: themeText.labelSmall?.copyWith(
-                  color: themeColor.outline,
-                  fontWeight: FontWeight.w300,
-                ),
+            ),
+            subtitle: Text(
+              'with VAT,SD',
+              style: themeText.labelSmall?.copyWith(
+                color: themeColor.outline,
+                fontWeight: FontWeight.w300,
               ),
-              trailing: BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  final vat=state is SingleProductFetchSuccess? state.products.productPrice??0.00+20:0;
-                  return Text(
-                    state is SingleProductFetchSuccess? "\$${(state.products.productPrice??0.00)+vat}": "",
-                    style: themeText.labelLarge?.copyWith(
-                      color: themeColor.onSurfaceVariant,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  );
-                },
-              ),
+            ),
+            trailing: BlocBuilder<ProductBloc, ProductState>(
+              builder: (context, state) {
+                final vat = state is SingleProductFetchSuccess
+                    ? state.products.vatSd ?? 0.00
+                    : 0;
+                final price = state is SingleProductFetchSuccess
+                    ? state.products.productPrice ?? 0.00
+                    : 0.0;
+                return Text(
+                  state is SingleProductFetchSuccess
+                      ? "\$${price + (price / 100 * vat)}"
+                      : "",
+                  style: themeText.labelLarge?.copyWith(
+                    color: themeColor.onSurfaceVariant,
+                    fontWeight: FontWeight.w900,
+                  ),
+                );
+              },
+            ),
           ),
           FullWidthButton(
             buttonText: 'Add to Cart',
@@ -311,10 +340,16 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildProductVariantGallery(List<Variant>? variant) {
-    return Column(mainAxisSize: MainAxisSize.min, children: [
-      Gap(10),
-      ProductVariantCategoryItem(
-          title: "Size", items: ["S", "M", "L", "XL", "XXL"])
-    ]);
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: List.generate(
+          variant!.length,
+          (index) => ProductVariantCategoryItem(
+              title: variant[index].category ?? "",
+              items: variant[index].items as List<Item>),
+          // ["S", "M", "L", "XL", "XXL"]
+        ));
   }
 }
+
+
