@@ -1,2 +1,8 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
 #include "Generated.xcconfig"
+# Include CocoaPods configuration
+//# For Debug
+//#include "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
+//
+//# For Release
+//#include "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
