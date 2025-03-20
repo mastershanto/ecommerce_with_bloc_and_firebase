@@ -41,6 +41,7 @@ dependencies:
   oktoast: ^3.3.2
   date_format: ^2.0.9
   intl: ^0.20.2
+  google_fonts: ^6.2.1
 #  fluttertoast: ^8.2.2
 
 
